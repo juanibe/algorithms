@@ -23,7 +23,6 @@ function same(arr1, arr2) {
         First iterate over each array, and assign each value of them as a key
         in the objects, and the ocurrencies as values.
     */
-
     for (let val of arr1) {
         obj1[val] ? obj1[val]++ : obj1[val] = 1;
     }
@@ -60,7 +59,6 @@ function same(arr1, arr2) {
     of the first. An anagram is a word, name or phrase formed by rearranging the letters
     of another, such as cinema, formed from iceman
 */
-
 function validAnagram(string1, string2) {
     if (string1.length !== string2.length) return false;
 

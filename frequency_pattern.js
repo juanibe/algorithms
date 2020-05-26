@@ -7,7 +7,7 @@
 */
 
 /*
-    Write a function called same whic accepts two arrays, the function should
+    Write a function called same which accepts two arrays, the function should
     return true if every value in the array has it's corresponding value squared
     in the second array. The frequency of values must be the same.   
 */

@@ -33,7 +33,7 @@ function _same(arr1, arr2) {
     return true;
 }
 
-// This two solutions uses O(N) operation.
+// This solution uses O(N).
 function same(arr1, arr2) {
 
     if (arr1.length !== arr2.length) return false;
@@ -81,6 +81,26 @@ function same(arr1, arr2) {
     of the first. An anagram is a word, name or phrase formed by rearranging the letters
     of another, such as cinema, formed from iceman
 */
+
+// This solution uses an O(N^2).
+function _validAnagram(string1, string2) {
+    if (string1.length !== string2.length) return false;
+
+    for (let i = 0; i < string1.length; i++) {
+        const value = string1[i];
+
+        const index = string2.indexOf(value)
+
+        if (index === -1) {
+            return false;
+        } else {
+            string2 = string2.replace(string1[i], "")
+        }
+    }
+    return true;
+}
+
+// This solution uses O(N).
 function validAnagram(string1, string2) {
     if (string1.length !== string2.length) return false;
 

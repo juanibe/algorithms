@@ -12,6 +12,28 @@
     in the second array. The frequency of values must be the same.   
 */
 
+// This solution uses an O(N^2).
+function _same(arr1, arr2) {
+
+    if (arr1.length !== arr2.length) return false;
+
+    for (let i = 0; i < arr1.length; i++) {
+        const value = arr1[i];
+
+        if (isNaN(value)) return false;
+
+        const index = arr2.indexOf(value ** 2)
+
+        if (index === -1) {
+            return false;
+        } else {
+            arr2.splice(index, 1)
+        }
+    }
+    return true;
+}
+
+// This two solutions uses O(N) operation.
 function same(arr1, arr2) {
 
     if (arr1.length !== arr2.length) return false;

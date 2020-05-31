@@ -57,6 +57,22 @@ function sumZero(array1) {
     in the array. There can be negative nubmers in the array
     but it will always be ordered.
 */
+function _countUniqueValues(array) {
+    if (array.length === 0) return 0;
+
+    // Initialize counter in 1 because if the array is not empty there will always be 1 unique number.
+    let counter = 1;
+    let i = 0;
+
+    for (let j = 1; j < array.length; j++) {
+        if (array[i] !== array[j]) {
+            counter++;
+        }
+        i++;
+    }
+    return counter;
+}
+
 function countUniqueValues(array) {
     if (array.length === 0) return 0;
 

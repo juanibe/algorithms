@@ -51,3 +51,101 @@ function sumZero(array1) {
     }
 }
 
+/*
+    Implement a function called countUniqueValues, which
+    accepts a sorted array, and counts the uniques values
+    in the array. There can be negative nubmers in the array
+    but it will always be ordered.
+*/
+function countUniqueValues(array) {
+    if (array.length === 0) return 0;
+
+    /*
+        Create one pointer at the beginning of the array.
+        There will be another pointer in the for loop, which 
+        will start in the position of pointer 1 plus 1.
+    */
+
+    let i = 0;
+
+    for (let j = 1; j < array.length; j++) {
+        /*
+            Here I will check if i === j. 
+            If the don't match, then add 1 to i and put the value of array[j] in array[i]. 
+            In case they match, the loop will continue and will add one to j. 
+            In this case i will increase each time numbers don't match, so i (+1) can be returned.
+            Also, the original value of i will be replaced by the value of j, so it will be compared 
+            with the next value of j.
+        */
+
+        if (array[i] !== array[j]) {
+            console.log(array)
+            i++;
+            array[i] = array[j];
+            console.log(array)
+        }
+
+    }
+    return i + 1;
+}
+
+/*
+    console.log(countUniqueValues([1, 2, 2, 3, 4, 5, 6, 6, 7]))
+
+    Compare 1 and 2. The don't match, so add 1 to i. Now i equals one.
+    Then assign the value of array[j] to array[i]. Then 2 (array[i] equals 2 (array[j]))
+    Before [ 1, 2, 2, 3, 4, 5, 6, 6, 7 ]
+             i  j
+    After  [ 1, 2, 2, 3, 4, 5, 6, 6, 7 ]
+               i/j
+
+    Compare 2 and 2. They are equals, so array stays the same and continue with loop
+    Befor / After  [ 1, 2, 2, 3, 4, 5, 6, 6, 7 ]
+                        i  j
+
+    Compare 2 and 3. The don't match, so add 1 to i. Now i equals two.
+    Then assign the value of array[j] to array[i]. Then 2 (array[i] equals 3 (array[j]))
+    [ 1, 2, 2, 3, 4, 5, 6, 6, 7 ]
+         i     j
+    [ 1, 2, 3, 3, 4, 5, 6, 6, 7 ]
+            i  j
+
+    Compare 3 and 3. They are equals, so array stays the same and continue with loop
+    Befor / After [ 1, 2, 3, 3, 4, 5, 6, 6, 7 ]
+                          i  j
+
+    Compare 3 and 4. They don't match, so add 1 to i. Now i equals three.
+    Then assign the value of array[j] to array[i]. Then 3 (array[i]) equals 4 (array[j])
+    [ 1, 2, 3, 3, 4, 5, 6, 6, 7 ]
+            i     j
+    [ 1, 2, 3, 4, 4, 5, 6, 6, 7 ]
+               i  j
+
+    Compare 4 and 4. They are equals, so array stays the same and continue with loop
+    Befor / After [ 1, 2, 3, 4, 4, 5, 6, 6, 7 ]
+                             i  j
+
+    Compare 4 and 5. They don't match. Same process.
+    [ 1, 2, 3, 4, 4, 5, 6, 6, 7 ]
+               i     j
+    [ 1, 2, 3, 4, 5, 5, 6, 6, 7 ]
+                  i  j
+
+    -> loop pass <-
+
+    [ 1, 2, 3, 4, 5, 5, 6, 6, 7 ]
+                  i     j
+    [ 1, 2, 3, 4, 5, 6, 6, 6, 7 ]
+                     i  j
+
+    -> loop pass <-
+    -> loop pass <-
+
+    [ 1, 2, 3, 4, 5, 6, 6, 6, 7 ]
+                     i        j
+    [ 1, 2, 3, 4, 5, 6, 7, 6, 7 ]
+                        i     j
+
+    7
+
+*/

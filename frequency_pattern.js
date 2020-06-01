@@ -127,3 +127,62 @@ function validAnagram(string1, string2) {
     return true;
 }
 
+/*
+    Write a function called sameFrequency. Given two positive integers
+    find out if the two numbers have the same frequency of digits.
+    Complexity: O(N)
+*/
+
+function sameFrequency(n1, n2) {
+    if (n1.length !== n2.length) return false;
+
+    n1 = n1.toString();
+    n2 = n2.toString();
+
+    let obj1 = {};
+    let obj2 = {};
+
+    for (let val of n1) {
+        obj1[val] ? obj1[val]++ : obj1[val] = 1;
+    }
+
+    for (let val of n2) {
+        obj2[val] ? obj2[val]++ : obj2[val] = 1;
+    }
+
+    for (let key in obj1) {
+        if (!(key in obj2)) {
+            return false;
+        }
+
+        if (obj1[key] !== obj2[key]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/*
+    Implement a function called, areThereDuplicates which accepts a variable number
+    of arguments and checks whether there are any duplicates among the arguments 
+    passed in. 
+    Optional: frequency counter or multiple pointers.
+*/
+function areThereDuplicates() {
+    let args = [];
+    let obj = {};
+    for (let val of arguments) {
+        args.push(val)
+    }
+
+    for (let val of args) {
+        obj[val] ? obj[val]++ : obj[val] = 1;
+    }
+
+    for (let key in obj) {
+        if (obj[key] > 1) {
+            return true;
+        }
+    }
+    return false;
+}

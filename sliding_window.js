@@ -58,7 +58,37 @@ function _maxSubArraySum(arr, num) {
 };
 
 /** SLIDING WINDOW APPROACH */
-/** BIG-O => O(N) */
+/** BIG-O => O(N) Linear complexity */
 function maxSubArraySum(arr, sum) {
+
+    let maxSum = 0;
+    let tempSum = 0;
+
+    if (arr.length < num) return null;
+
+    // At the very beginning we sum the first group of numbers
+    for (let i = 0; i < num; i++) {
+        maxSum += arr[i];
+    }
+
+    tempSum = maxSum;
+
+    /**
+        * Then instead of going with the next sequence of numbers, we
+        * substract the one that does not belong any more to the sequence
+        * and add the new one
+        * Lets suppose our "num" is 3. 
+        * [10, 20, 32, 4, 5, 5, 1]
+        * Here we will sum our first 3 => 10, 20 and 32.
+        * Then instead of summing 20, 32 and 4, we keep the common numbers (20 & 32)
+        * and substract to maxSum 10 and add 4.
+    */
+    for (let i = num; i < arr.length; i++) {
+        tempSum = tempSum - arr[i - num] + arr[i];
+
+        // Check if out temporary maxSum is bigger or not to our tempSum and add the max to maxSum.
+        maxSum = Math.max(maxSum, tempSum);
+    }
+    return maxSum;
 
 }

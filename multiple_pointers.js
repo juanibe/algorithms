@@ -95,10 +95,8 @@ function countUniqueValues(array) {
         */
 
         if (array[i] !== array[j]) {
-            console.log(array)
             i++;
             array[i] = array[j];
-            console.log(array)
         }
 
     }

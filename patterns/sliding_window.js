@@ -129,6 +129,8 @@ function minSubArrayLen(nums, sum) {
 
         else if (total >= sum) {
             minLen = Math.min(minLen, end - start);
+
+            // Here I rest the satart, because, in next iteration, the start will be next number.
             total -= nums[start];
             start++;
         }
@@ -139,3 +141,65 @@ function minSubArrayLen(nums, sum) {
     }
     return minLen === Infinity ? 0 : minLen;
 };
+
+/**
+ * Write a function called findLongestSubstring, 
+ * which accepts a string and returns the length of the longest 
+ * substring with all distinct characters.
+ * 
+ * === EXAMPLE ===
+ * 
+ * findLongestSubString('rithmschool') // 7
+ * 
+ * Time complexity O(N)
+ */
+function findLongestSubstring(str) {
+    let longest = 0;
+    let seen = {};
+    let start = 0;
+
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i];
+        if (seen[char]) {
+            start = Math.max(start, seen[char]);
+        }
+        // index - beginning of substring + 1 (to include current in count)
+        longest = Math.max(longest, i - start + 1);
+        // store the index of the next char so as to not double count
+        seen[char] = i + 1;
+    }
+    return longest;
+}
+
+  // hello
+
+  // 1
+  // char = "h"
+  // no entra en if
+  // longest (0, 0 - 0 + 1) = 1
+  // seen[char] = 1 {h: 1}
+
+  // 2
+  // char = "e"
+  // no entra en if
+  // longest = (1, 1 - 0 + 1) = 2
+  // seen[char] = 1 + 1 = 2 {e: 2}
+
+  // 3
+  // char = "l"
+  // no entra
+  // longest (2, 2 - 0 + 1) = 3
+  // seen[char] = 2 + 1 = 3
+
+  // 4
+  // char = "l"
+  // entra
+        // start = (0, 3) = 3
+  // longest = (3, 3 - 3 + 1) = 3
+  // seen[char] = 3 + 1 = 4 {l: 4}
+
+  // 5
+  // char = "o"
+  // no entra
+  // longest = (3, 4 - 3 +1) = 3
+  //seen[char] = 4 + 1 = 5 {o:5}   

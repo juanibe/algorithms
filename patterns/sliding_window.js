@@ -130,7 +130,7 @@ function minSubArrayLen(nums, sum) {
         else if (total >= sum) {
             minLen = Math.min(minLen, end - start);
 
-            // Here I rest the satart, because, in next iteration, the start will be next number.
+            // Here I rest the start, because, in next iteration, the start will be next number.
             total -= nums[start];
             start++;
         }

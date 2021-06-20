@@ -19,11 +19,7 @@
  *    - If you never find the value, return -1 
  */
 
-/**
-* Write a function called binarySearch
-* which accepts an array and a value, and returns the index at which the value exists. 
-* If the value does not exist in the array, return -1.
-*/
+
 function binarySearch(arr, value) {
     let leftPointer = 0;
     let rightPointer = arr.length - 1;

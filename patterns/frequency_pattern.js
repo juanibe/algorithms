@@ -14,66 +14,62 @@
 
 // This solution uses an O(N^2).
 function _same(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false;
 
-    if (arr1.length !== arr2.length) return false;
+  for (let i = 0; i < arr1.length; i++) {
+    const value = arr1[i];
 
-    for (let i = 0; i < arr1.length; i++) {
-        const value = arr1[i];
+    if (isNaN(value)) return false;
 
-        if (isNaN(value)) return false;
+    const index = arr2.indexOf(value ** 2);
 
-        const index = arr2.indexOf(value ** 2)
-
-        if (index === -1) {
-            return false;
-        } else {
-            arr2.splice(index, 1)
-        }
+    if (index === -1) {
+      return false;
+    } else {
+      arr2.splice(index, 1);
     }
-    return true;
+  }
+  return true;
 }
 
 // This solution uses O(N).
 function same(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false;
 
-    if (arr1.length !== arr2.length) return false;
+  let obj1 = {};
+  let obj2 = {};
 
-    let obj1 = {};
-    let obj2 = {};
-
-    /*
+  /*
         First iterate over each array, and assign each value of them as a key
         in the objects, and the ocurrencies as values.
     */
-    for (let val of arr1) {
-        obj1[val] ? obj1[val]++ : obj1[val] = 1;
-    }
+  for (let val of arr1) {
+    obj1[val] ? obj1[val]++ : (obj1[val] = 1);
+  }
 
-    for (let val of arr2) {
-        obj2[val] ? obj2[val]++ : obj2[val] = 1;
-    }
+  for (let val of arr2) {
+    obj2[val] ? obj2[val]++ : (obj2[val] = 1);
+  }
 
-    for (let key in obj1) {
-
-        /* 
+  for (let key in obj1) {
+    /* 
             Check if each key in one object (any) is also included in the other
             object squared. It does not matter the values yet. The values, are the 
             time appearing.
         */
-        if (!(key ** 2 in obj2)) {
-            return false;
-        }
+    if (!(key ** 2 in obj2)) {
+      return false;
+    }
 
-        /*
+    /*
             Now check how many times each "key" is appearing in the array. This is
             represented by the "values" in the objects
         */
-        if (obj2[key ** 2] !== obj1[key]) {
-            return false;
-        }
-
+    if (obj2[key ** 2] !== obj1[key]) {
+      return false;
     }
-    return true;
+  }
+  return true;
 }
 
 /*
@@ -84,47 +80,47 @@ function same(arr1, arr2) {
 
 // This solution uses an O(N^2).
 function _validAnagram(string1, string2) {
-    if (string1.length !== string2.length) return false;
+  if (string1.length !== string2.length) return false;
 
-    for (let i = 0; i < string1.length; i++) {
-        const value = string1[i];
+  for (let i = 0; i < string1.length; i++) {
+    const value = string1[i];
 
-        const index = string2.indexOf(value)
+    const index = string2.indexOf(value);
 
-        if (index === -1) {
-            return false;
-        } else {
-            string2 = string2.replace(string1[i], "")
-        }
+    if (index === -1) {
+      return false;
+    } else {
+      string2 = string2.replace(string1[i], "");
     }
-    return true;
+  }
+  return true;
 }
 
 // This solution uses O(N).
 function validAnagram(string1, string2) {
-    if (string1.length !== string2.length) return false;
+  if (string1.length !== string2.length) return false;
 
-    let object1 = {};
-    let object2 = {};
+  let object1 = {};
+  let object2 = {};
 
-    for (let value of string1) {
-        object1[value] ? object1[value]++ : object1[value] = 1;
+  for (let value of string1) {
+    object1[value] ? object1[value]++ : (object1[value] = 1);
+  }
+
+  for (let value of string2) {
+    object2[value] ? object2[value]++ : (object2[value] = 1);
+  }
+
+  for (let key in object1) {
+    if (!(key in object2)) {
+      return false;
     }
 
-    for (let value of string2) {
-        object2[value] ? object2[value]++ : object2[value] = 1;
+    if (object1[key] !== object2[key]) {
+      return false;
     }
-
-    for (let key in object1) {
-        if (!(key in object2)) {
-            return false;
-        }
-
-        if (object1[key] !== object2[key]) {
-            return false;
-        }
-    }
-    return true;
+  }
+  return true;
 }
 
 /*
@@ -134,32 +130,32 @@ function validAnagram(string1, string2) {
 */
 
 function sameFrequency(n1, n2) {
-    if (n1.length !== n2.length) return false;
+  if (n1.length !== n2.length) return false;
 
-    n1 = n1.toString();
-    n2 = n2.toString();
+  n1 = n1.toString();
+  n2 = n2.toString();
 
-    let obj1 = {};
-    let obj2 = {};
+  let obj1 = {};
+  let obj2 = {};
 
-    for (let val of n1) {
-        obj1[val] ? obj1[val]++ : obj1[val] = 1;
+  for (let val of n1) {
+    obj1[val] ? obj1[val]++ : (obj1[val] = 1);
+  }
+
+  for (let val of n2) {
+    obj2[val] ? obj2[val]++ : (obj2[val] = 1);
+  }
+
+  for (let key in obj1) {
+    if (!(key in obj2)) {
+      return false;
     }
 
-    for (let val of n2) {
-        obj2[val] ? obj2[val]++ : obj2[val] = 1;
+    if (obj1[key] !== obj2[key]) {
+      return false;
     }
-
-    for (let key in obj1) {
-        if (!(key in obj2)) {
-            return false;
-        }
-
-        if (obj1[key] !== obj2[key]) {
-            return false;
-        }
-    }
-    return true;
+  }
+  return true;
 }
 
 /*
@@ -169,20 +165,58 @@ function sameFrequency(n1, n2) {
     Optional: frequency counter or multiple pointers.
 */
 function areThereDuplicates() {
-    let args = [];
-    let obj = {};
-    for (let val of arguments) {
-        args.push(val)
-    }
+  let args = [];
+  let obj = {};
+  for (let val of arguments) {
+    args.push(val);
+  }
 
-    for (let val of args) {
-        obj[val] ? obj[val]++ : obj[val] = 1;
-    }
+  for (let val of args) {
+    obj[val] ? obj[val]++ : (obj[val] = 1);
+  }
 
-    for (let key in obj) {
-        if (obj[key] > 1) {
-            return true;
-        }
+  for (let key in obj) {
+    if (obj[key] > 1) {
+      return true;
     }
-    return false;
+  }
+  return false;
+}
+
+/* Same frequency explanation */
+/* I need to check if both numbers are composed by the same digits and also the same amount of times */
+/* 1234, 2413 -> true */
+/* 1234, 1223 -> false */
+function __sameFrequency(n1, n2) {
+  /* I will convert into string the numbers, so I can iterate over them */
+  n1 = n1.toString();
+  n2 = n2.toString();
+
+  /* If both numbers has different lenght, the don't have the same occurency so I return false */
+  if (n1.length !== n2.length) return false;
+
+  /* I create two objects in which I will store the values and amount of times that value appears */
+  let obj1 = {};
+  let obj2 = {};
+
+  /* I will loop over the numbers, and I will save in each corresponding object */
+  for (let val of n1) {
+    obj1[val] ? obj1[val]++ : (obj1[val] = 1);
+  }
+
+  for (let val of n2) {
+    obj2[val] ? obj2[val]++ : (obj2[val] = 1);
+  }
+
+  /* Now I need to check 2 things: First that both objects have the same key */
+  for (let key in obj1) {
+    if (!(key in obj2)) return false;
+  }
+
+  /* And now that I have same keys en both objects, I have to check that the values of each key are the same */
+  for (let key in obj1) {
+    if (obj1[key] !== obj2[key]) return false;
+  }
+
+  return true;
 }

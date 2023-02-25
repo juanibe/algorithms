@@ -220,3 +220,54 @@ function __sameFrequency(n1, n2) {
 
   return true;
 }
+
+/**
+ * Given two arrays with strings:
+ *  - The first one with the ids of the address of each user
+ *  - The second one with the ids of all the addresses
+ * Return an array with all the ids of the second array that is not included in the first.
+ *
+ *  => Since they are mongo ids in a database we know that the ids will not be repeated inside the array.
+ *  => For the nature of the database we know that all ids in users will have it correspondant in address, but
+ *     not all ids in addresses will correspond to one in users.
+ *
+ * == PSEUDO CODE ==
+ * - Create an empty array, which will the be one to be returned.
+ * - Create one object with the id as key and a number as value, representing the ocurrences
+ * - Iterate over each array and:
+ *    - If the key already exists, sum one to the value
+ *    - If the key doesn't exist assign it to the object and set the value to one.
+ * - Iterate over the object and check, if the key is 1, push the id to the array created, if its 2, continue iteration.
+ * - Return the array
+ */
+function getUniqueElement(usersArray, addressesArray) {
+  const edgeCase = [];
+  const availableIds = [];
+  const orphanIds = [];
+  const obj = {};
+
+  for (let val of addressesArray) {
+    obj[val] ? obj[val]++ : (obj[val] = 1);
+  }
+
+  for (let val of usersArray) {
+    obj[val] ? obj[val]++ : (obj[val] = 1);
+  }
+
+  for (let key in obj) {
+    if (obj[key] === 1) {
+      orphanIds.push(key);
+    } else if (obj[key] === 2) {
+      availableIds.push(key);
+    } else {
+      edgeCase.push(key);
+    }
+  }
+
+  return { orphanIds, availableIds, edgeCase };
+}
+
+const unsersIds = ["aaa", "bbb", "ccc", "jjj"];
+const addressesIds = ["ppp", "aaa", "mmm", "ccc", "jjj", "bbb", "zzz"];
+
+console.log(getUniqueElement(unsersIds, addressesIds));

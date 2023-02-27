@@ -22,6 +22,11 @@
  */
 function sumRange(num) {
   /**
+   * Validate that is a positive number
+   */
+  if (num < 1) return 0;
+
+  /**
    * Base case
    */
   if (num === 1) return 1;
